@@ -11,8 +11,6 @@ use std::ascii::AsciiExt;
 /// This is just to be fun with iterators...
 /// This should be O(n/2), and would be fewer lines without all the comments.
 pub fn is_palindrome(phrase: &str) -> bool {
-    let length = phrase.len();
-
     // get the chars iterator and associated index
     phrase.char_indices().filter(|&(_,c)| c.is_alphabetic())
                 // zip with the second half...
@@ -22,7 +20,7 @@ pub fn is_palindrome(phrase: &str) -> bool {
                            // and filter out bad cars
                            .filter(|&(_,c)| c.is_alphabetic()))
                 // accept all input until the indexes have crossed
-                .take_while(|&((first_count, _), (last_count, _))| first_count < length - last_count)
+                .take_while(|&((first_count, _), (last_count, _))| {println!("{} < {}", first_count, last_count); first_count < last_count})
                 // check that all the chars from the begining and end match
                 .all(|((_, first_char), (_, last_char))| {
                     first_char.to_ascii_lowercase() == last_char.to_ascii_lowercase()
@@ -39,6 +37,8 @@ pub fn is_palindrome(phrase: &str) -> bool {
 ///  close to the semantics used in C/C++, with the exception of the chars().collect() this should
 ///  be O(n/2).
 pub fn is_palindrome_classic(phrase: &str) -> bool {
+    if phrase.len() == 0 { return true }
+
     // need to do this because Rust is rightly trying to force you away from treating strs as
     //  arrays
     let phrase: Vec<char> = phrase.chars().collect();
@@ -80,7 +80,11 @@ fn test_palindrome_classic() {
 
 #[cfg(test)]
 fn test_is_palindrome_base<F>(is_palindrome: F) where F: Fn(&str) -> bool {
-    //assert!(is_palindrome(""));
+    assert!(is_palindrome(""));
+    assert!(is_palindrome("a"));
+    assert!(is_palindrome(".,,/.,/.,././.,=-=--"));
+    assert!(is_palindrome("a,,,,,,,,,,,,,,,a"));
+    assert!(is_palindrome("a,,,,,bb,,,,,,,,a"));
     assert!(is_palindrome("race car"));
     assert!(is_palindrome("racecar"));
     assert!(is_palindrome("raccar"));
