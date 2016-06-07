@@ -20,7 +20,7 @@ pub fn is_palindrome(phrase: &str) -> bool {
                            // and filter out bad cars
                            .filter(|&(_,c)| c.is_alphabetic()))
                 // accept all input until the indexes have crossed
-                .take_while(|&((first_count, _), (last_count, _))| {println!("{} < {}", first_count, last_count); first_count < last_count})
+                .take_while(|&((first_count, _), (last_count, _))| {first_count < last_count})
                 // check that all the chars from the begining and end match
                 .all(|((_, first_char), (_, last_char))| {
                     first_char.to_ascii_lowercase() == last_char.to_ascii_lowercase()
