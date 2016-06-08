@@ -46,19 +46,22 @@ pub fn is_palindrome_classic(phrase: &str) -> bool {
     // start from the beginning
     let mut first_idx = 0;
 
-    // and the end, btw, don't forget the off-by-one b/c of the
+    // and the end, btw, don't forget the off-by-one b/c of len() is actually past the last index...
+    //  this is a classic error avoided implicitly above.
     let mut last_idx = phrase.len() - 1;
     // loop and guard that we don't go too far
     while first_idx < last_idx {
-        // filter out non-alphabetics
+        // filter out non-alphabetics, the += and -= would be something you could accidentally screw up,
+        //   avoided in the iterator based impl
         if !phrase[first_idx].is_alphabetic() { first_idx += 1; continue }
         if !phrase[last_idx].is_alphabetic() { last_idx -= 1; continue }
 
-        // compare the values
+        // compare the values, did we compare the write indexes? again avoided in the iterator impl
         if phrase[first_idx].to_ascii_lowercase() != phrase[last_idx].to_ascii_lowercase() {
             return false;
         }
 
+        // same += and -= potential bug avoided in the iterator impl
         first_idx += 1;
         last_idx -= 1;
     }
