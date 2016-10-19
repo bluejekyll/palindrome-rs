@@ -8,7 +8,7 @@ use std::ascii::AsciiExt;
 ///
 /// * `phrase` - the phrase to inspect
 ///
-/// This is just to be fun with iterators...
+/// This is just to have fun with iterators...
 /// This should be O(n/2), and would be fewer lines without all the comments.
 pub fn is_palindrome(phrase: &str) -> bool {
     // get the chars iterator and associated index
@@ -27,7 +27,7 @@ pub fn is_palindrome(phrase: &str) -> bool {
                 })
 }
 
-/// this is a class array implementation (for comparison)
+/// this is a classic array implementation (for comparison)
 ///
 /// # Arguments
 ///
