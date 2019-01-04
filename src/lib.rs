@@ -56,7 +56,7 @@ pub fn is_palindrome_classic(phrase: &str) -> bool {
         if !phrase[first_idx].is_alphabetic() { first_idx += 1; continue }
         if !phrase[last_idx].is_alphabetic() { last_idx -= 1; continue }
 
-        // compare the values, did we compare the write indexes? again avoided in the iterator impl
+        // compare the values, did we compare the correct indexes? again avoided in the iterator impl
         if phrase[first_idx].to_ascii_lowercase() != phrase[last_idx].to_ascii_lowercase() {
             return false;
         }
